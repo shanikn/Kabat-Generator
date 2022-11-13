@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <meta charset="UTF-8">
+    <title>New Project</title>
+    <style>
+        .table, th, td {
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+            vertical-align: middle;
+            caption-side: bottom;
+        }
+    </style>
+{% endblock %}
+{%block body%}
+
+
+<div class="peage-header">
+    <h1 style="text-align: center">Select an Existing Project!</h1>
+</div>
+    {% if tasks|length < 1 %}
+    <h4 style="text-align: center">There are no projects. Create new one/s by returning to the home page.</h4>
+    {% else %}
+    <div class="new">
+            <div class="container">
+                <div class="jumbotron">
+                    <table class="table-success table-striped table-condensed">
+                        <tr>
+                            <th>id</th>
+                            <th>project name</th>
+                            <th>number of scenarios</th>
+
+                            <th>number of errors OPT</th>
+                            <th>number of errors RDR</th>
+                            <th>number of errors GPS</th>
+                            <th>number of errors IMU</th>
+
+                            <th>name of error OPT</th>
+                            <th>name of error RDR</th>
+                            <th>name of error GPS</th>
+                            <th>name of error IMU</th>
+
+                            <td>date created</td>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        <script> i=1;</script>
+                        {% for task in tasks %}
+                        <tr>
+                            <td><script>document.write(i)</script></td>
+                            <script> i=i+1;</script>
+
+                            <td>{{ task.proj_name }}</td>
+                            <td>{{ task.num_scen }}</td>
+
+                            <td>{{ task.num_error_OPT }}</td>
+                            <td>{{ task.num_error_RDR }}</td>
+                            <td>{{ task.num_error_GPS }}</td>
+                            <td>{{ task.num_error_IMU }}</td>
+
+                            <td>{{ task.type_error_OPT }}</td>
+                            <td>{{ task.type_error_RDR }}</td>
+                            <td>{{ task.type_error_GPS }}</td>
+                            <td>{{ task.type_error_IMU }}</td>
+
+                            <td>{{ task.date_created() }}</td>
+
+                            <td>
+                                <a href="/update_experiment/{{ task.id }}">Update</a>
+                            </td>
+                            <td>
+                                <a href="/delete_experiment/{{ task.id }}">Delete</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+    </div>
+{% endblock %}

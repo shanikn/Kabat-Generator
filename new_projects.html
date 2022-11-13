@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <meta charset="UTF-8">
+    <title>New Project</title>
+    <style>
+        .table, th, td {
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+            vertical-align: middle;
+            caption-side: bottom;
+        }
+    </style>
+{% endblock %}
+{%block body%}
+
+
+<div class="peage-header">
+    <h1 style="text-align: center">New Projects Data Setting</h1>
+</div>
+<h2 style="text-align: center">Enter data to create some new projects!</h2>
+
+<div class="new">
+    <form action="/new_projects/" method="POST" style="text-align: center">
+        <h4>Project name: <input type="text" name="num_projs" id="num_projs" value="3" required="required"></h4>
+        <h4>Projects' name: <input type="text" name="projs_name" id="projs_name" value="hello" required="required"></h4>
+        <h4>Number of scenarios: <input type="text" name="num_scens" id="num_scens" value="3" required="required"></h4>
+        <h4>Number of errors (in weight):</h4>
+            <div class="container">
+                <div class="jumbotron">
+                    <table class="table-success table-striped table-condensed">
+                        <tr>
+                            <th>number of errors</th>
+                            <th>OPT</th>
+                            <th>RDR</th>
+                            <th>GPS</th>
+                            <th>IMU</th>
+                        </tr>
+
+                        {% for x in range(10) %}
+                        <tr>
+                            <th scope="row">                 {{ x }}</th>
+                            <td><input type="text" name="num_errors_OPT_{{x}}" id="num_errors_OPT_{{x}}" value="0" required="required"></td>
+                            <td><input type="text" name="num_errors_RDR_{{x}}" id="num_errors_RDR_{{x}}" value="0" required="required"></td>
+                            <td><input type="text" name="num_errors_GPS_{{x}}" id="num_errors_GPS_{{x}}" value="0" required="required"></td>
+                            <td><input type="text" name="num_errors_IMU_{{x}}" id="num_errors_IMU_{{x}}" value="0" required="required"></td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+
+        <h4>Type (name) of errors (in weight):</h4>
+            <div class="container">
+                <div class="jumbotron">
+                    <table class="table-success table-striped table-condensed">
+                        <tr>
+                            <th>type (name) of errors</th>
+                            <th>OPT</th>
+                            <th>RDR</th>
+                            <th>GPS</th>
+                            <th>IMU</th>
+                        </tr>
+
+                        {% for error in ["FV", "AE", "AVE", "FVE"] %}
+                        <tr>
+                            <th scope="row">                 {{ error }}</th>
+                            <td><input type="text" name="type_errors_OPT_{{error}}" id="type_errors_OPT_{{error}}" value="0" required="required"></td>
+                            <td><input type="text" name="type_errors_RDR_{{error}}" id="type_errors_RDR_{{error}}" value="0" required="required"></td>
+                            <td><input type="text" name="type_errors_GPS_{{error}}" id="type_errors_GPS_{{error}}" value="0" required="required"></td>
+                            <td><input type="text" name="type_errors_IMU_{{error}}" id="type_errors_IMU_{{error}}" value="0" required="required"></td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+
+        <h4>Errors' parameters:</h4>
+            <div class="container">
+                <div class="jumbotron">
+                    <table class="table-success table-striped table-condensed">
+                        <tr>
+                            <th></th>
+                            <th>OPT</th>
+                            <th>RDR</th>
+                            <th>GPS</th>
+                            <th>IMU</th>
+                        </tr>
+
+                        {% for e in ["FV", "AE", "AVE", "FVE"] %}
+                        <tr><td><p></p></td></tr>
+                            {% for i in ['start time', 'time length', 'error max'] %}
+                                <tr>
+                                    <th>{{e}}: {{i}}</th>
+                                    <td><input type="text" name="{{e}}_{{i}}_1s" id="{{e}}_{{i}}_1s" value="0" required="required"></td>
+                                    <td><input type="text" name="{{e}}_{{i}}_2s" id="{{e}}_{{i}}_2s" value="0" required="required"></td>
+                                    <td><input type="text" name="{{e}}_{{i}}_3s" id="{{e}}_{{i}}_3s" value="0" required="required"></td>
+                                    <td><input type="text" name="{{e}}_{{i}}_4s" id="{{e}}_{{i}}_4s" value="0" required="required"></td>
+                                </tr>
+                            {% endfor %}
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        <button class="btn btn-success">Create projects</button>
+    </form>
+</div>
+
+{% endblock %}

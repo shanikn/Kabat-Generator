@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <meta charset="UTF-8">
+    <title>Update Experiment</title>
+    <style>
+        .table, th, td {
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+            vertical-align: middle;
+            caption-side: bottom;
+        }
+    </style>
+{% endblock %}
+{%block body%}
+
+
+<div class="peage-header">
+    <h1 style="text-align: center">Update Experiment</h1>
+</div>
+
+<form action="/update_experiment/{{ task.id }}" method="POST" style="text-align: center">
+    <div class="new">
+            <div class="container">
+                <div class="jumbotron">
+                    <table class="table-success table-striped table-condensed">
+                        <tr>
+                            <th>project name</th>
+                            <th>number of scenarios</th>
+
+                            <th>number of errors OPT</th>
+                            <th>number of errors RDR</th>
+                            <th>number of errors GPS</th>
+                            <th>number of errors IMU</th>
+
+                            <th>name of error OPT</th>
+                            <th>name of error RDR</th>
+                            <th>name of error GPS</th>
+                            <th>name of error IMU</th>
+
+                            <td><input type="text" name="proj_name" id="proj_name" value="{{ task.proj_name }}"></td>
+                            <td><input type="text" name="num_scen" id="num_scen" value="{{ task.num_scen }}"></td>
+
+                            <td><input type="text" name="num_error_OPT" id="num_error_OPT" value="{{ task.num_error_OPT }}"></td>
+                            <td><input type="text" name="num_error_RDR" id="num_error_RDR" value="{{ task.num_error_RDR }}"></td>
+                            <td><input type="text" name="num_error_GPS" id="num_error_GPS" value="{{ task.num_error_GPS }}"></td>
+                            <td><input type="text" name="num_error_IMU" id="num_error_IMU" value="{{ task.num_error_IMU }}"></td>
+
+                            <td><input type="text" name="type_error_OPT" id="type_error_OPT" value="{{ task.type_error_OPT }}"></td>
+                            <td><input type="text" name="type_error_RDR" id="type_error_RDR" value="{{ task.type_error_RDR }}"></td>
+                            <td><input type="text" name="type_error_GPS" id="type_error_GPS" value="{{ task.type_error_GPS }}"></td>
+                            <td><input type="text" name="type_error_IMU" id="type_error_IMU" value="{{ task.type_error_IMU }}"></td>
+
+                            <td><input type="submit" value="Update"></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+    </div>
+</form>
+{% endblock %}
